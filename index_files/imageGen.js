@@ -10,7 +10,7 @@ function getImage() {
   loadingLabel.style.display = "block";
   previewBox.style.backgroundImage = "none";
   previewImage.style.display = "none";
-        
+
   const query = queryInput.value;
 
   fetch('https://hilltophse.co.uk/api/getImage2.php?query=' + query)
@@ -35,11 +35,9 @@ function getImage() {
           document.getElementById('errorMessage').textContent = 'Error fetching image: ' + error.message;
       })
       .finally(() => {
-          // Re-enable input and button
           loadingLabel.style.display = "none";
           queryInput.disabled = false;
           generateButton.disabled = false;
-          queryInput.value = ""; // Clear the input field
       });
 }
 
@@ -47,11 +45,8 @@ function displayGeneratedImage(imageUrl) {
     const previewBox = document.querySelector('.previewBox');
     const previewImage = document.getElementById('preview');
 
-    // Set the image URL and make it visible
     previewImage.src = imageUrl;
     previewImage.style.visibility = 'visible';
-
-    // Remove the background logo and the semi-transparent black background from the previewBox
     previewBox.style.backgroundImage = 'none';
 }
 
@@ -61,7 +56,6 @@ function downloadImage() {
       const downloadLink = document.createElement('a');
       downloadLink.href = image.src;
 
-      // Extract the image file name or use a default name
       const imageName = image.src.split('/').pop().split('?')[0];
       downloadLink.download = imageName;
 
