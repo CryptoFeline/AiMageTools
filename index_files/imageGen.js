@@ -8,16 +8,16 @@ function getImage() {
       const query = document.getElementById("queryTb").value;
 
     fetch('https://hilltophse.co.uk/api/getImage2.php?query=' + query)
-    .then(function(response) {
-      response.text().then(function(text) {
-        document.getElementById("preview").src = text;
+      .then(response => response.json()) // Parse the JSON response
+      .then(data => {
+          const imageUrl = data.image_url; // Extract the image URL
+          document.getElementById("preview").src = imageUrl;
         document.getElementById("loadingLb").style.display = "none";
         document.getElementById("queryTb").disabled = false;
         document.getElementById("generateBtn").disabled = false;
         document.getElementById("preview").style.display = "block";
         });
-    });
-}
+    };
 
 function displayGeneratedImage(imageUrl) {
     const previewBox = document.querySelector('.previewBox');
