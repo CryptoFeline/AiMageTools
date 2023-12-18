@@ -3020,7 +3020,9 @@ a:hover {
   max-height: 100%;
   display: block;
   margin: auto;
-  visibility: hidden; /* Hide image initially */
+  visibility: visible; /* Hide image initially */
+  border-radius: 25px;
+  border: 1px solid #fff;
 }
 
 .spinner {
