@@ -52,25 +52,16 @@ function displayGeneratedImage(imageUrl) {
 function downloadImage() {
   const image = document.getElementById('preview');
   if (image && image.src) {
-      fetch(image.src)
-          .then(response => response.blob())
-          .then(blob => {
-              const blobUrl = window.URL.createObjectURL(blob);
-              const downloadLink = document.createElement('a');
-              downloadLink.href = blobUrl;
-              
-              const imageName = image.src.split('/').pop().split('?')[0] || 'downloadedImage.png';
-              downloadLink.download = imageName;
-              
-              document.body.appendChild(downloadLink);
-              downloadLink.click();
-              document.body.removeChild(downloadLink);
-              window.URL.revokeObjectURL(blobUrl); // Clean up the URL object
-          })
-          .catch(error => {
-              console.error('Error downloading the image:', error);
-              alert("Failed to download image.");
-          });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = image.src;
+
+      // Extract image file name from src or assign a default name
+      const imageName = image.src.split('/').pop().split('?')[0];
+      downloadLink.download = imageName; // Set the download attribute with file name
+
+      document.body.appendChild(downloadLink); // Append to body
+      downloadLink.click(); // Trigger click to download
+      document.body.removeChild(downloadLink); // Remove the link from DOM
   } else {
       alert("No image available for download.");
   }
