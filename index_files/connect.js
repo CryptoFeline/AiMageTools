@@ -38,8 +38,7 @@ async function connectWallet() {
                 document.getElementById('imageGenInterface').style.display = 'block';
             } else {
                 // The user does not have the required number of tokens - Show error page
-                document.getElementById('landingPage').style.display = 'none';
-                document.getElementById('errorPage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'block';
             }
         } catch (error) {
             // User denied account access or some other error occurred
