@@ -1,5 +1,3 @@
-import Web3 from 'https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js';
-
 async function connectWallet() {
     if (window.ethereum) { // Check if MetaMask is installed
         try {
