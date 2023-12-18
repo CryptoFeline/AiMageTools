@@ -55,13 +55,13 @@ function downloadImage() {
       const downloadLink = document.createElement('a');
       downloadLink.href = image.src;
 
-      // Extract image file name from src or assign a default name
+      // Extract the image file name or use a default name
       const imageName = image.src.split('/').pop().split('?')[0];
-      downloadLink.download = imageName; // Set the download attribute with file name
+      downloadLink.download = imageName;
 
-      document.body.appendChild(downloadLink); // Append to body
-      downloadLink.click(); // Trigger click to download
-      document.body.removeChild(downloadLink); // Remove the link from DOM
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
   } else {
       alert("No image available for download.");
   }
