@@ -1,41 +1,47 @@
 function getImage() {
-    document.getElementById("queryTb").disabled = true;
-    document.getElementById("generateBtn").disabled = true;
-    document.getElementById("loadingLb").style.display = "block";
-    document.getElementById('previewBox').style.backgroundImage = "none";
-    document.getElementById("preview").style.display = "none";
-          
-      const query = document.getElementById("queryTb").value;
+  const queryInput = document.getElementById("queryTb");
+  const generateButton = document.getElementById("generateBtn");
+  const loadingLabel = document.getElementById("loadingLb");
+  const previewImage = document.getElementById("preview");
+  const previewBox = document.getElementById('previewBox');
 
-      fetch('https://hilltophse.co.uk/api/getImage2.php?query=' + query)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (typeof data === 'object' && data !== null && data.image_url) {
-                document.getElementById("preview").src = data.image_url;
-                document.getElementById("loadingLb").style.display = "none";
-                document.getElementById("preview").style.display = "block";
-            } else {
-                throw new Error('Image URL not found in response');
-            }
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-            
-            // Re-enable input and button
-            document.getElementById("loadingLb").style.display = "none";
-            document.getElementById("queryTb").disabled = false;
-            document.getElementById("generateBtn").disabled = false;
+  queryInput.disabled = true;
+  generateButton.disabled = true;
+  loadingLabel.style.display = "block";
+  previewBox.style.backgroundImage = "none";
+  previewImage.style.display = "none";
+        
+  const query = queryInput.value;
 
-            // Show error section with message
-            document.getElementById('errorSection').style.display = 'block';
-            document.getElementById('errorMessage').textContent = 'Error fetching image: ' + error.message;
-        });
-    };
+  fetch('https://hilltophse.co.uk/api/getImage2.php?query=' + query)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          if (typeof data === 'object' && data !== null && data.image_url) {
+              previewImage.src = data.image_url;
+              loadingLabel.style.display = "none";
+              previewImage.style.display = "block";
+          } else {
+              throw new Error('Image URL not found in response');
+          }
+      })
+      .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+          document.getElementById('errorSection').style.display = 'block';
+          document.getElementById('errorMessage').textContent = 'Error fetching image: ' + error.message;
+      })
+      .finally(() => {
+          // Re-enable input and button
+          loadingLabel.style.display = "none";
+          queryInput.disabled = false;
+          generateButton.disabled = false;
+          queryInput.value = ""; // Clear the input field
+      });
+}
 
 function displayGeneratedImage(imageUrl) {
     const previewBox = document.querySelector('.previewBox');
