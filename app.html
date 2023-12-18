@@ -200,6 +200,9 @@
                     <!--- Image Preview --->
                     <div id="previewBox" class="previewBox">
                         <div id="loadingLb" class="lds-ripple"><div></div><div></div></div>
+                        <div id="errorSection">
+                            <p id="errorMessage"></p>
+                        </div>
                         <img id="preview" style="width:500px;height:500px;" />
                     </div> 
 
@@ -211,8 +214,8 @@
                     <!--- Button Row --->
                     <div class="button-row" style="display: flex; justify-content: center; align-items: center; margin: 5px;">
                         <button class="button w-inline-block" onclick="getImage()" id="generateBtn">Get Image</button>
-                        <button class="button w-inline-block" onclick="" id="">Regenerate</button>
-                        <button class="button w-inline-block" onclick="" id="">Save Image</button>
+                        <button class="button w-inline-block" onclick="" id="">Share</button>
+                        <button class="button w-inline-block" id="saveImage">Save Image</button>
                     </div>
                 </div>
             </div>
