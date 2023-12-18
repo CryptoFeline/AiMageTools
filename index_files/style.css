@@ -3014,8 +3014,6 @@ a:hover {
 
 /* Style for the image within the previewBox */
 .previewBox #preview {
-  min-width:500px;
-  min-height:500px;
   max-width: 100%;
   max-height: 100%;
   display: block;
@@ -5723,18 +5721,6 @@ ul li.price {
     min-height:auto;
     max-width: 300px;
     height: 300px;
-  }
-
-  .previewBox #preview {
-    min-width:300px;
-    min-height:300px;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: auto;
-    visibility: visible;
-    border-radius: 25px;
-    border: 1px solid #fff;
   }
 
   .button-tertiary.hide-tablet {
