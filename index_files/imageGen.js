@@ -8,33 +8,33 @@ function getImage() {
       const query = document.getElementById("queryTb").value;
 
       fetch('https://hilltophse.co.uk/api/getImage2.php?query=' + query)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
-      .then(data => {
-          if (data.image_url) {
-              document.getElementById("preview").src = data.image_url;
-              document.getElementById("loadingLb").style.display = "none";
-              document.getElementById("preview").style.display = "block";
-          } else {
-              throw new Error('Image URL not found in response');
-          }
-      })
-      .catch(error => {
-          console.error('There has been a problem with your fetch operation:', error);
-          // Handle the error, show an error message to the user
-          // Re-enable the inputs
-          document.getElementById("loadingLb").style.display = "none";
-          document.getElementById("queryTb").disabled = false;
-          document.getElementById("generateBtn").disabled = false;
-          
-          // Show an error section or message
-          document.getElementById('errorSection').style.display = 'block';
-          document.getElementById('errorMessage').textContent = 'Error fetching image: ' + error.message;
-      });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (typeof data === 'object' && data !== null && data.image_url) {
+                document.getElementById("preview").src = data.image_url;
+                document.getElementById("loadingLb").style.display = "none";
+                document.getElementById("preview").style.display = "block";
+            } else {
+                throw new Error('Image URL not found in response');
+            }
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            
+            // Re-enable input and button
+            document.getElementById("loadingLb").style.display = "none";
+            document.getElementById("queryTb").disabled = false;
+            document.getElementById("generateBtn").disabled = false;
+
+            // Show error section with message
+            document.getElementById('errorSection').style.display = 'block';
+            document.getElementById('errorMessage').textContent = 'Error fetching image: ' + error.message;
+        });
     };
 
 function displayGeneratedImage(imageUrl) {
