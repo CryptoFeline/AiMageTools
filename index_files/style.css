@@ -3085,6 +3085,51 @@ a:hover {
   animation: glowing 1.5s infinite alternate;
 }
 
+.button-locked {
+  grid-column-gap: .5rem;
+  color: #fff;
+  text-align: center;
+  background-color: #6b2a7b;
+  border-radius: 10rem;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all .3s cubic-bezier(.165, .84, .44, 1);
+  display: flex;
+}
+
+.button-locked_active {
+  grid-column-gap: .5rem;
+  color: var(--white);
+  text-align: center;
+  border-color: var(--white);
+  border: 1px solid var(--white);
+  background-color: var(--gray-300);
+  border-radius: 10rem;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all .3s cubic-bezier(.165, .84, .44, 1);
+  display: flex;
+  animation: glowing 1.5s infinite alternate;
+}
+
+.button-locked:hover {
+  border-color: var(--white);
+  border: 1px solid var(--white);
+  color: var(--white);
+  background-color: var(--gray-300);
+  animation: glowing 1.5s infinite alternate;
+}
+
 .testimonial-section {
   display: flex;
   justify-content: center; /* Aligns children (columns) in the center of the container */
