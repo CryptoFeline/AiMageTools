@@ -4276,7 +4276,7 @@ ul li.price {
   height: 50px; /* Fixed height of 30px */
   background: #6b2a7b3d;
   box-sizing: border-box; /* Include padding and border in the width and height calculation */
-  border-radius: 20px; /* Rounded corners for the input */
+  border-radius: 20px 0px 0px 20px;
   font-size: 1em; /* Font size relative to the surrounding text */
 }
 
