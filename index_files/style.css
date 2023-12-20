@@ -1225,6 +1225,11 @@ textarea.w-select {
   .button_active {
     font-size: 0.7rem
   }
+
+  .button-locked_active {
+    font-size: 0.7rem
+  }
+
   tfoot a {
     padding: 0.5em; /* Reduce padding on smaller screens */
     font-size: 0.7em; /* Reduce font size if necessary */
@@ -5619,6 +5624,15 @@ ul li.price {
   .button:hover {
     background-color: white;
     color: var(--primary);
+  }
+
+  .button-locked {
+    font-size: 0.7rem;
+  }
+
+  .button-locked:hover {
+    background-color: var(--gray-300);
+    color: var(--white);
   }
 
   .button-secondary {
