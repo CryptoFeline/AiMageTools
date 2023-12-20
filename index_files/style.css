@@ -4267,7 +4267,7 @@ ul li.price {
 .promptInput {
   display: flex;
   justify-content: center; /* Center children horizontally */
-  align-items: center; /* Center children vertically */
+  align-items: stretch; /* Center children vertically */
   margin: 5px;
 }
 
@@ -4275,11 +4275,20 @@ ul li.price {
   width: 100%; /* Fill the width of its container */
   height: 50px; /* Fixed height of 30px */
   background: #6b2a7b3d;
-  padding: 0 10px; /* Add some padding inside the input */
   box-sizing: border-box; /* Include padding and border in the width and height calculation */
-  border: 1px solid white; /* Border styling, can be adjusted as needed */
   border-radius: 20px; /* Rounded corners for the input */
   font-size: 1em; /* Font size relative to the surrounding text */
+}
+
+.promptInput input,
+.promptInput button {
+    line-height: 40px; /* Aligns text vertically in the center */
+    border: 1px solid white; /* Consistent border */
+    padding: 0 10px; /* Adjust padding as needed */
+}
+
+#generateBtn {
+  border-radius: 0px 20px 20px 0px;
 }
 
 .footer-legal-link {
