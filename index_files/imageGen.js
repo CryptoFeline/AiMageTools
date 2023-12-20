@@ -50,21 +50,4 @@ function displayGeneratedImage(imageUrl) {
     previewBox.style.backgroundImage = 'none';
 }
 
-function downloadImage() {
-  const image = document.getElementById('preview');
-  if (image && image.src) {
-      const downloadLink = document.createElement('a');
-      downloadLink.href = image.src;
-
-      const imageName = image.src.split('/').pop().split('?')[0];
-      downloadLink.download = imageName;
-
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-  } else {
-      alert("No image available for download.");
-  }
-}
-
 document.getElementById('saveImage').addEventListener('click', downloadImage);
