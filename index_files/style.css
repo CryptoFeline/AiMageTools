@@ -4266,25 +4266,25 @@ ul li.price {
 
 .promptInput {
   display: flex;
-  justify-content: center; /* Center children horizontally */
-  align-items: stretch; /* Center children vertically */
+  justify-content: center; 
+  align-items: stretch; 
   margin: 5px;
 }
 
 .promptInput input {
-  width: 100%; /* Fill the width of its container */
-  height: 50px; /* Fixed height of 30px */
+  width: 100%;
+  height: 50px; 
   background: #6b2a7b3d;
-  box-sizing: border-box; /* Include padding and border in the width and height calculation */
-  border-radius: 20px 0px 0px 20px;
-  font-size: 1em; /* Font size relative to the surrounding text */
+  box-sizing: border-box; 
+  font-size: 1em; 
 }
 
 .promptInput input,
 .promptInput button {
-    line-height: 40px; /* Aligns text vertically in the center */
-    border: 1px solid white; /* Consistent border */
-    padding: 0 10px; /* Adjust padding as needed */
+    line-height: 40px;
+    border: 1px solid white;
+    border-radius: 20px 0px 0px 20px;
+    padding: 0 10px;
 }
 
 #generateBtn {
