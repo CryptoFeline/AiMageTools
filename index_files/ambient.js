@@ -54,7 +54,6 @@ function handleAmbientParticles() {
 }
 
 function animateAmbient() {
-  console.log('Animating ambient particles'); // Debugging log
   ambientCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
   handleAmbientParticles();
   requestAnimationFrame(animateAmbient);
