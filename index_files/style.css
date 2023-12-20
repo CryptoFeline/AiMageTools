@@ -3089,7 +3089,7 @@ a:hover {
   background-color: var(--white);
   animation: glowing 1.5s infinite alternate;
 }
-
+ 
 .button-locked {
   grid-column-gap: .5rem;
   color: #fff;
