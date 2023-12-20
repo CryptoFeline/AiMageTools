@@ -3094,7 +3094,7 @@ a:hover {
   grid-column-gap: .5rem;
   color: #fff;
   text-align: center;
-  background-color: #6b2a7b;
+  background-color: var(--gray-500);
   border-radius: 10rem;
   justify-content: center;
   align-items: center;
@@ -3113,7 +3113,7 @@ a:hover {
   text-align: center;
   border-color: var(--white);
   border: 1px solid var(--white);
-  background-color: var(--gray-300);
+  background-color: var(--gray-500);
   border-radius: 10rem;
   justify-content: center;
   align-items: center;
@@ -5642,6 +5642,10 @@ ul li.price {
   .button-locked:hover {
     background-color: var(--gray-300);
     color: var(--white);
+  }
+
+  .promptInput input {
+    font-size: 0.7rem;
   }
 
   .button-secondary {
