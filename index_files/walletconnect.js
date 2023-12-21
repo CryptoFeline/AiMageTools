@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           const balance = await tokenContract.methods.balanceOf(userAddress).call();
           if (parseInt(balance) > 1) {
-            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('landingPage').style.display = 'none';
             document.getElementById('imageGenInterface').style.display = 'block';
           } else {
             document.getElementById('errorMessage').style.display = 'block';
