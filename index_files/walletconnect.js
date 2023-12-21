@@ -4,10 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
       throw new Error('VITE_PROJECT_ID is not set')
     }
   
-    var provider = new WalletConnectProvider.default({
-      infuraId: projectId, // Use the projectId as the infuraId
-      rpc: {1: "https://mainnet.infura.io/v3/" + projectId} // Mainnet RPC URL
-    });
+    // Define provider options
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider.default, // required
+        options: {
+          infuraId: projectId, // required
+          rpc: {1: "https://mainnet.infura.io/v3/" + projectId}, // Mainnet RPC URL
+        }
+      }
+    };
+  
+    // Check for MetaMask, else use WalletConnect
+    let provider;
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      provider = window.ethereum;
+    } else {
+      provider = new WalletConnectProvider.default({
+        infuraId: projectId,
+        rpc: {1: "https://mainnet.infura.io/v3/" + projectId}
+      });
+    }
   
     async function connectWallet() {
       try {
@@ -57,4 +74,5 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Event listeners
     document.getElementById('open-connect-modal').addEventListener('click', connectWallet);
-  });  
+  });
+  
