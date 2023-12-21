@@ -1,37 +1,43 @@
+import { mainnet } from '@wagmi/core/chains'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
-import WalletConnectProvider from 'https://unpkg.com/@walletconnect/web3-provider@latest/dist/umd/index.min.js';
-import QRCodeTerminal from "qrcode-terminal";
-import Web3 from "web3";
+const projectId = '425e9e4db7894509a4dc5721e55b0aca';
+if (!projectId) {
+  throw new Error('VITE_PROJECT_ID is not set')
+}
 
+// Define the chains you want to support
+const chains = [mainnet];
+
+// Create the wagmiConfig
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata: {
+    name: 'AiMage Studio',
+    description: 'Welcome to our innovative AI design generation platform.',
+    url: 'https://aimagetools.com',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+});
+
+// Create the modal
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'dark' });
+
+// Function to open the connect modal
 async function connectWallet() {
-    // Create an instance of WalletConnectProvider
-    const provider = new WalletConnectProvider({
-        bridge: "https://bridge.walletconnect.org",
-        qrcodeModalOptions: {
-            mobileLinks: [
-                "trust://",
-                "metamask://",
-                "https://metamask.app.link/send"
-            ],
-        },
-    });
-
     try {
-        // Enable session (triggers QR Code modal)
-        await provider.enable();
+        // Open the connect modal
+        const connection = await modal.open();
+        
+        // Connection is successful
+        console.log("Wallet connected:", connection);
 
-        // Create a new Web3 instance
-        const web3 = new Web3(provider);
-
-        // Get accounts
-        const accounts = await web3.eth.getAccounts();
-        console.log("Wallet connected:", accounts[0]);
-
-        // Define the address of token
+        // Define the address of the token contract and the wallet address
         const tokenContractAddress = '0x4872208C83acBfd7f6Dea5AA6CE6d5D7aED2AC1C';
         const userAddress = accounts[0];
 
-        // Define the ABI of the token contract
+        // Define the ABI (Application Binary Interface) of the token contract
         const tokenContractABI = [
             // balanceOf function ABI
             {
@@ -59,16 +65,10 @@ async function connectWallet() {
         }
 
     } catch (error) {
-        // Handle errors if connection fails
+        // Handle errors, such as user closing the modal
         console.error("Could not connect to wallet:", error);
     }
-
-    // Disconnect handling
-    provider.on("disconnect", (code, reason) => {
-        console.log(code, reason);
-        // Handle disconnect logic
-    });
 }
 
-// Event listener remains the same
-document.getElementById('connectWalletButton').addEventListener('click', connectWallet);
+// Event listeners
+document.getElementById('open-connect-modal').addEventListener('click', connectWallet);
