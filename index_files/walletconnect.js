@@ -1,7 +1,7 @@
 // Import necessary libraries
-import Web3 from 'https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js';
-import Web3Modal from 'https://cdn.jsdelivr.net/npm/web3modal@latest';
-import WalletConnectProvider from 'https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@latest';
+import Web3 from 'https://cdn.skypack.dev/web3';
+import Web3Modal from 'https://cdn.skypack.dev/web3modal';
+import WalletConnectProvider from 'https://cdn.skypack.dev/@walletconnect/web3-provider';
 
 // Web3Modal configuration
 const providerOptions = {
