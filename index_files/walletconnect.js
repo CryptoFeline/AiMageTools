@@ -1,46 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
     const projectId = '425e9e4db7894509a4dc5721e55b0aca';
     if (!projectId) {
-      throw new Error('VITE_PROJECT_ID is not set')
+      throw new Error('VITE_PROJECT_ID is not set');
     }
   
-    // Define provider options
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider.default, // required
-        options: {
-          infuraId: projectId, // required
-          rpc: {1: "https://mainnet.infura.io/v3/" + projectId}, // Mainnet RPC URL
-        }
-      }
-    };
+    // Connect Wallet Modal elements
+    const connectWalletModal = document.getElementById('connectWalletModal');
+    const connectMetamaskButton = document.getElementById('connectMetamask');
+    const connectWalletConnectButton = document.getElementById('connectWalletConnect');
   
-    // Check for MetaMask, else use WalletConnect
-    let provider;
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      provider = window.ethereum;
-    } else {
-      provider = new WalletConnectProvider.default({
-        infuraId: projectId,
+    // Function to show the connect wallet modal
+    function openConnectWalletModal() {
+      connectWalletModal.style.display = 'flex';
+    }
+  
+    // Function to close the modal
+    function closeModal() {
+      connectWalletModal.style.display = 'none';
+    }
+  
+    // MetaMask Connection
+    connectMetamaskButton.addEventListener('click', async function() {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          handleAccountsChanged(accounts);
+        } catch (error) {
+          console.error("User denied account access", error);
+        }
+      } else {
+        alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
+      }
+    });
+  
+    // WalletConnect Connection
+    connectWalletConnectButton.addEventListener('click', async function() {
+      const provider = new WalletConnectProvider.default({
+        infuraId: projectId, // use your projectId as the Infura ID
         rpc: {1: "https://mainnet.infura.io/v3/" + projectId}
       });
-    }
   
-    async function connectWallet() {
       try {
-        // Open the connect modal
         const accounts = await provider.enable();
+        handleAccountsChanged(accounts);
+      } catch (error) {
+        console.error("WalletConnect connection failed", error);
+      }
+    });
   
-        // Connection is successful
-        console.log("Wallet connected:", accounts);
-  
-        // Create web3 instance
-        const web3 = new Web3(provider);
-  
-        const tokenContractAddress = '0x4872208C83acBfd7f6Dea5AA6CE6d5D7aED2AC1C';
+    // Handle account changes and perform actions based on the connected account
+    async function handleAccountsChanged(accounts) {
+      if (accounts.length === 0) {
+        console.log('Please connect to a wallet.');
+      } else {
+        const web3 = new Web3(window.ethereum || provider);
         const userAddress = accounts[0];
+        console.log('Connected accounts:', accounts);
   
-        // Define the ABI of the token contract
+        // Specify your contract's details
+        const tokenContractAddress = '0x4872208C83acBfd7f6Dea5AA6CE6d5D7aED2AC1C';
         const tokenContractABI = [
           {
             "constant": true,
@@ -51,28 +69,26 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         ];
   
-        // Create contract instance
+        // Create contract instance and interact with it
         const tokenContract = new web3.eth.Contract(tokenContractABI, tokenContractAddress);
-  
-        // Call the balanceOf function from the contract
-        const balance = await tokenContract.methods.balanceOf(userAddress).call();
-  
-        // Assuming the balance is returned as an integer number of tokens
-        if (parseInt(balance) > 1) {
-          document.getElementById('landingPage').style.display = 'block';
-          document.getElementById('imageGenInterface').style.display = 'block';
-        } else {
+        try {
+          const balance = await tokenContract.methods.balanceOf(userAddress).call();
+          if (parseInt(balance) > 1) {
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('imageGenInterface').style.display = 'block';
+          } else {
+            document.getElementById('errorMessage').style.display = 'block';
+          }
+        } catch (error) {
+          console.error("Error interacting with the contract:", error);
+          document.getElementById('errorMessage').innerHTML = "Error interacting with the contract: " + error.message;
           document.getElementById('errorMessage').style.display = 'block';
         }
-  
-      } catch (error) {
-        console.error("Could not connect to wallet:", error);
-        document.getElementById('errorMessage').innerHTML = "Error connecting to wallet: " + error.message;
-        document.getElementById('errorMessage').style.display = 'block';
       }
+      closeModal();
     }
   
-    // Event listeners
-    document.getElementById('open-connect-modal').addEventListener('click', connectWallet);
+    // Event listener for opening connect wallet modal
+    document.getElementById('open-connect-modal').addEventListener('click', openConnectWalletModal);
   });
   

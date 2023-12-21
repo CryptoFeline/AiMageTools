@@ -168,6 +168,16 @@
                         </div>
                         <div class="button-row">
                             <button id="open-connect-modal" class="button w-inline-block">Enter Studio</button>
+                            <!-- Connect Wallet Modal -->
+                            <div id="connectWalletModal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+                                <div style="background-color:#fff; padding:20px; border-radius:10px; display:flex; flex-direction:column; align-items:center;">
+                                <h2 style="color:#000;">Connect to a Wallet</h2>
+                                <button id="connectMetamask" style="margin:10px; padding:10px; width:80%; background-color:#f6851b; color:#fff; border:none; border-radius:5px;">Connect MetaMask</button>
+                                <button id="connectWalletConnect" style="margin:10px; padding:10px; width:80%; background-color:#3b6c4c; color:#fff; border:none; border-radius:5px;">Connect WalletConnect</button>
+                                <button onclick="closeModal()" style="margin-top:15px; background: none; border: none; color: red; cursor: pointer;">Close</button>
+                                </div>
+                            </div>
+  
                             <a href="https://app.uniswap.org/swap?outputCurrency=0x4872208c83acbfd7f6dea5aa6ce6d5d7aed2ac1c"
                                 target="_blank" rel="noopener noreferrer" class="button w-inline-block">
                                 <div class="buttonbutton-text">Get $AiMAGE</div>
