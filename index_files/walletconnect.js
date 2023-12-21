@@ -1,5 +1,5 @@
 
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectProvider from 'https://unpkg.com/@walletconnect/web3-provider@latest/dist/umd/index.min.js';
 import QRCodeTerminal from "qrcode-terminal";
 import Web3 from "web3";
 
