@@ -5666,11 +5666,11 @@ ul li.price {
   }
 
   .button-row {
-    align-self: stretch;
+    align-self: center;
   }
 
   .button-row-tools {
-    align-self: stretch;
+    align-self: center;
   }
 
   .paragraph-large {
