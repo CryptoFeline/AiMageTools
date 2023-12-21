@@ -2575,6 +2575,13 @@ a:hover {
   padding-bottom: 0px;
 }
 
+.section2.hero {
+  background-position: center, 0 100%;
+  background-size: cover;
+  padding-top: 100px;
+  padding-bottom: 0px;
+}
+
 .background {
   background-image:
     radial-gradient(circle at top right, rgb(95 42 110 / 30%) 0%, transparent 50%),
