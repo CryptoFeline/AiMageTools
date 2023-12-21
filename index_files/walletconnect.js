@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const projectId = '425e9e4db7894509a4dc5721e55b0aca';
+    const projectId = '425e9e4db7894509a4dc5721e55b0aca'; // Replace with your actual project ID
     if (!projectId) {
       throw new Error('VITE_PROJECT_ID is not set');
     }
@@ -21,16 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // MetaMask Connection
     connectMetamaskButton.addEventListener('click', async function() {
-      if (window.ethereum && window.ethereum.isMetaMask) {
+        closeModal(); // Close the modal when user chooses an option
+        if (window.ethereum && window.ethereum.isMetaMask) {
         try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          handleAccountsChanged(accounts);
+            // Request account access
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            
+            // Handle the accounts changed (function defined elsewhere in your script)
+            handleAccountsChanged(accounts);
         } catch (error) {
-          console.error("User denied account access", error);
+            // Handle errors like user denying account access
+            console.error("User denied account access or error occurred:", error);
         }
-      } else {
+        } else {
+        // Alert the user if MetaMask is not installed
         alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
-      }
+        }
     });
   
     // WalletConnect Connection
