@@ -1,5 +1,5 @@
 import { mainnet } from 'https://cdn.skypack.dev/@wagmi/core@latest/chains';
-import { createWeb3Modal, defaultWagmiConfig } from 'https://cdn.skypack.dev/@web3modal/wagmi';
+import { createWeb3Modal, defaultWagmiConfig } from 'https://cdn.skypack.dev/@web3modal/wagmi@latest';
 
 const projectId = '425e9e4db7894509a4dc5721e55b0aca';
 if (!projectId) {
